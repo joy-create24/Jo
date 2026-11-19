@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Joy Produksi">
-<link rel="manifest" href='data:application/manifest+json,{"name":"Joy Produksi","short_name":"Joy","description":"Mesin Produksi Digital JOY Corporation","start_url":"./index.html","display":"standalone","background_color":"%230A0907","theme_color":"%23D6B173","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 192 192%27%3E%3Crect width=%27192%27 height=%27192%27 fill=%27%230A0907%27/%3E%3Ctext x=%2750%25%27 y=%2755%25%27 font-family=%27Georgia,serif%27 font-size=%2780%27 font-weight=%27bold%27 fill=%27%23D6B173%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EJ%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml"}]}'>
+<link rel="manifest" href="manifest.json">
 <title>Joy Produksi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,6 @@ body {
   max-width: 680px; margin: 0 auto; padding: 16px 14px 100px; line-height: 1.6;
 }
 
-/* === LOGIN SCREEN === */
 #login-screen {
   position: fixed; inset: 0; background: var(--hitam); z-index: 9999;
   display: flex; align-items: center; justify-content: center;
@@ -63,7 +62,6 @@ body {
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 .shake { animation: shake 0.4s ease; }
 
-/* === MAIN APP === */
 header { text-align: center; margin-bottom: 16px; padding: 10px 0; }
 header h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--emas); font-weight: 500; letter-spacing: 1px; }
 .tagline { font-family: 'Playfair Display', serif; color: var(--abu); font-size: 13px; font-style: italic; margin-top: 4px; }
@@ -165,7 +163,6 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
 .stat-num { font-size: 16px; font-weight: 700; color: var(--emas); font-family: monospace; }
 .stat-label { font-size: 9px; color: var(--abu); margin-top: 3px; }
 
-/* MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
 .modal-overlay.open { display: flex; }
 .modal-content { background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; width: 100%; max-width: 500px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; }
@@ -174,16 +171,14 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
 .modal-close { background: transparent; border: none; color: var(--abu); font-size: 18px; cursor: pointer; padding: 0; margin: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex: 1; font-size: 13px; line-height: 1.7; color: var(--putih); white-space: pre-wrap; word-wrap: break-word; }
 
-/* INSTALL BUTTON */
-.install-fab {
+.install-btn {
   position: fixed; bottom: 80px; right: 16px; width: 52px; height: 52px;
   border-radius: 50%; background: var(--hijau); color: white;
   border: none; font-size: 22px; cursor: pointer; z-index: 997;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: none;
-  align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
   animation: bounce 2s infinite;
 }
-.install-fab.show { display: flex; }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
 .chat-fab { position: fixed; bottom: 16px; right: 16px; width: 52px; height: 52px; border-radius: 50%; background: var(--emas); color: var(--hitam); border: none; font-size: 24px; cursor: pointer; z-index: 998; box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
@@ -213,7 +208,6 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div id="login-screen">
   <div class="login-box">
     <h1 class="login-title">Joy Produksi</h1>
@@ -227,7 +221,6 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
   </div>
 </div>
 
-<!-- MAIN APP -->
 <header>
   <h1>Joy Produksi</h1>
   <p class="tagline">kami ada karena kamu Ade</p>
@@ -394,7 +387,6 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
   <div id="log"></div>
 </div>
 
-<!-- MODAL VIEWER -->
 <div id="viewModal" class="modal-overlay">
   <div class="modal-content">
     <div class="modal-header">
@@ -405,10 +397,7 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
   </div>
 </div>
 
-<!-- INSTALL BUTTON -->
-<button id="installBtn" class="install-fab" title="Install sebagai App">📲</button>
-
-<!-- CHAT -->
+<button id="installBtn" class="install-btn" title="Install sebagai App">📲</button>
 <button id="chatFab" class="chat-fab">💬</button>
 <div id="chatPanel" class="chat-panel">
   <div class="chat-header">
@@ -453,6 +442,7 @@ revenue = parseInt(LS.get(REV)||'0');
 let ownerVisible=true, rekVisible=true, revVisible=true, busy=false;
 let mode247Active=false, mode247Timer=null, dailyCount=0, dailyTarget=10;
 let dailyDate=new Date().toDateString(), currentStatus='idle';
+let deferredPrompt = null;
 
 const TY = [
   {n:'🎨 Template Canva',hMin:75000,hMax:250000,p:(t,m)=>`Buat paket template Canva premium "${t}" untuk ${m}. 20-30 template siap edit, panduan warna & font.`},
@@ -483,7 +473,6 @@ const CHARACTERS = {
 };
 let activeChar='qwen';
 
-// === LOGIN ===
 function checkLogin() {
   const pass = $('login-pass').value;
   if(pass === DEFAULT_PIN) {
@@ -500,7 +489,6 @@ function checkLogin() {
   }
 }
 
-// === MODAL VIEWER ===
 window.viewProduct = function(idx) {
   const p = P[idx];
   if (!p || !p.files[0]) return;
@@ -511,15 +499,7 @@ window.viewProduct = function(idx) {
 window.closeViewModal = function() { $('viewModal').classList.remove('open'); };
 $('viewModal').addEventListener('click', function(e) { if (e.target === $('viewModal')) closeViewModal(); });
 
-// === PWA INSTALL ===
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  $('installBtn').classList.add('show');
-  log('📲 <b>Aplikasi siap di-install!</b> Klik tombol 📲 di pojok kanan bawah.','system');
-});
-
+// INSTALL BUTTON - SELALU MUNCUL
 $('installBtn').onclick = async () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -528,28 +508,27 @@ $('installBtn').onclick = async () => {
       log('✅ <b>Aplikasi berhasil di-install!</b> Cek home screen Mas Ade.','success');
     }
     deferredPrompt = null;
-    $('installBtn').classList.remove('show');
   } else {
-    // Fallback untuk iOS/manual
-    alert('Untuk install:\n\n📱 Android (Chrome):\nKlik ⋮ → "Tambahkan ke layar utama"\n\n🍎 iPhone (Safari):\nKlik Share → "Tambah ke Layar Utama"');
+    alert('📲 CARA INSTALL APLIKASI:\n\n' +
+          '📱 ANDROID (Chrome):\n' +
+          '1. Klik titik tiga (⋮) di pojok kanan atas\n' +
+          '2. Pilih "Tambahkan ke layar utama" atau "Install app"\n' +
+          '3. Klik "Tambahkan"\n\n' +
+          '🍎 iPHONE (Safari):\n' +
+          '1. Klik tombol Share (kotak dengan panah)\n' +
+          '2. Scroll ke bawah, pilih "Tambah ke Layar Utama"\n' +
+          '3. Klik "Tambahkan"\n\n' +
+          '✅ Ikon "Joy Produksi" akan muncul di home screen!');
   }
 };
 
-// === SERVICE WORKER INLINE ===
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
 if ('serviceWorker' in navigator) {
-  const swCode = `
-    const CACHE='joy-v75';
-    self.addEventListener('install',e=>{self.skipWaiting();});
-    self.addEventListener('activate',e=>{self.clients.claim();});
-    self.addEventListener('fetch',e=>{
-      e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
-    });
-  `;
-  try {
-    const blob = new Blob([swCode], {type: 'application/javascript'});
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(() => {});
-  } catch(e) {}
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
 function renderTY(){ $('ty').innerHTML=TY.map((x,i)=>`<option value="${i}">${x.n}</option>`).join(''); }
@@ -877,7 +856,6 @@ window.sendChat=async function(){
   renderChat(); saveChat();
 };
 
-// INIT
 window.addEventListener('DOMContentLoaded',()=>{
   $('login-pass').focus();
   $('login-btn').onclick = checkLogin;
@@ -893,6 +871,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   log('✅ <b>Joy Produksi v7.5 PWA siap!</b>','success');
   log('🛡️ <b>Sistem Keamanan AKTIF:</b> Auto-shadow 1 jam, AI auto-retry, Konfirmasi hapus ganda.','system');
   log('💬 Klik 💬 untuk ngobrol dengan tim','info');
+  log('📲 <b>Klik tombol 📲 hijau di pojok kanan bawah untuk install app!</b>','system');
   
   setInterval(doShadowBackup,3600000);
   doShadowBackup();
@@ -1006,4 +985,4 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
 </body>
-  </html>
+</html>
