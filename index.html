@@ -2,8 +2,15 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOY v6.1 - Clean UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0907">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JOY">
+<title>Joy Produksi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root {
   --hitam: #0A0907; --gelap: #141210; --batas: #24211D;
@@ -12,89 +19,125 @@
   --ungu: #B19CD9; --pink: #E8A0BF; --cyan: #7DD3C0;
   --kuning: #E8C547;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--hitam); color: var(--putih);
-  max-width: 680px; margin: 0 auto; padding: 20px 16px 100px; line-height: 1.6;
+  max-width: 680px; margin: 0 auto; padding: 16px 14px 100px; line-height: 1.6;
 }
-header { text-align: center; margin-bottom: 24px; }
-header h1 { font-family: Georgia, serif; font-size: 28px; color: var(--emas); font-weight: 500; }
-header p { color: var(--abu); font-size: 13px; margin-top: 4px; }
-.version { display: inline-block; background: var(--emas); color: var(--hitam); padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-top: 6px; }
 
-.card { background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
-.kv { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--batas); font-size: 14px; }
-.kv span:first-child { color: var(--abu); }
-.rek-num { color: var(--emas); font-family: monospace; letter-spacing: 1.5px; font-weight: 600; user-select: all; }
-.rev-wrap { display: flex; align-items: center; gap: 8px; }
+/* === LOGIN SCREEN === */
+#login-screen {
+  position: fixed; inset: 0; background: var(--hitam); z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+#login-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.login-box { text-align: center; width: 100%; max-width: 320px; padding: 20px; }
+.login-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--emas); font-weight: 500; margin-bottom: 8px; letter-spacing: 1px; }
+.login-tagline { font-family: 'Playfair Display', serif; color: var(--abu); font-size: 14px; font-style: italic; margin-bottom: 32px; }
+.login-input-wrap {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gelap); border: 1px solid var(--batas);
+  border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+.login-input-wrap:focus-within { border-color: var(--emas); }
+.login-pipe { color: var(--emas); font-family: monospace; font-size: 18px; margin-right: 8px; animation: blink 1s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+#login-pass {
+  background: transparent; border: none; color: var(--putih);
+  font-size: 16px; text-align: center; width: 100%; outline: none;
+  letter-spacing: 3px; font-family: monospace;
+}
+.login-btn {
+  width: 100%; background: var(--emas); color: var(--hitam);
+  border: none; border-radius: 10px; padding: 14px;
+  font-size: 16px; font-weight: 700; letter-spacing: 3px;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.login-btn:hover { opacity: 0.9; transform: scale(0.98); }
+.login-error { color: var(--merah); font-size: 12px; margin-top: 12px; min-height: 16px; font-weight: 600; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.shake { animation: shake 0.4s ease; }
+
+/* === MAIN APP === */
+header { text-align: center; margin-bottom: 16px; padding: 10px 0; }
+header h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--emas); font-weight: 500; letter-spacing: 1px; }
+.tagline { font-family: 'Playfair Display', serif; color: var(--abu); font-size: 13px; font-style: italic; margin-top: 4px; }
+.owner-label { color: var(--abu); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+.owner-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; }
+.owner-name { color: var(--putih); font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; }
+.owner-name.hidden { color: var(--abu); letter-spacing: 3px; font-size: 12px; }
+.version { display: inline-block; background: var(--emas); color: var(--hitam); padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700; margin-top: 8px; }
+
+.tiny-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--batas); cursor: pointer;
+  display: inline-block; margin-left: 8px;
+  transition: all 0.3s ease; vertical-align: middle;
+}
+.tiny-dot.on { background: var(--emas); box-shadow: 0 0 6px var(--emas); }
+
+.card { background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+.kv { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--batas); font-size: 13px; gap: 10px; }
+.kv:last-child { border-bottom: none; }
+.kv-label { color: var(--abu); white-space: nowrap; }
+.kv-value { display: flex; align-items: center; gap: 8px; }
+.rek-num { color: var(--emas); font-family: monospace; font-weight: 600; user-select: all; font-size: 13px; letter-spacing: 1px; }
 .rev-num { color: var(--hijau); font-weight: 600; font-family: monospace; }
-.eye-btn { background: transparent; border: 1px solid var(--batas); color: var(--abu); padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 0; }
 
-input, select, textarea, button { box-shadow: none !important; outline: none !important; -webkit-tap-highlight-color: transparent; }
-input, select, textarea { width: 100%; background: var(--hitam); border: 1px solid var(--batas); color: var(--putih); border-radius: 10px; padding: 13px; font-size: 15px; margin: 8px 0; }
-input:focus, select:focus, textarea:focus { border-color: var(--emas) !important; }
-textarea { min-height: 90px; resize: vertical; font-family: inherit; }
+input:not(#login-pass), select, textarea { width: 100%; background: var(--hitam); border: 1px solid var(--batas); color: var(--putih); border-radius: 10px; padding: 11px; font-size: 14px; margin: 5px 0; outline: none; font-family: inherit; }
+input:not(#login-pass):focus, select:focus, textarea:focus { border-color: var(--emas) !important; }
+textarea { min-height: 70px; resize: vertical; }
 
-button { padding: 12px 16px; border-radius: 10px; border: 1px solid transparent; font-weight: 600; font-size: 14px; cursor: pointer; margin: 4px; }
-button.utama { background: var(--emas); color: var(--hitam); }
-button.sekunder { background: transparent; color: var(--emas); border-color: var(--emas); }
-button.bahaya { background: transparent; color: var(--merah); border-color: var(--merah); }
-button.sukses { background: transparent; color: var(--hijau); border-color: var(--hijau); }
-button:hover { opacity: 0.85; }
+button:not(.login-btn) { padding: 10px 12px; border-radius: 10px; border: 1px solid transparent; font-weight: 600; font-size: 12px; cursor: pointer; margin: 3px; outline: none; font-family: inherit; }
+.utama { background: var(--emas); color: var(--hitam); }
+.sekunder { background: transparent; color: var(--emas); border-color: var(--emas); }
+.bahaya { background: transparent; color: var(--merah); border-color: var(--merah); }
+.sukses { background: transparent; color: var(--hijau); border-color: var(--hijau); }
+button:not(.login-btn):hover { opacity: 0.85; }
 button:disabled { opacity: 0.35; cursor: not-allowed; }
 
-.row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
 
-/* COLLAPSIBLE STYLE - UNIFIED */
-summary { 
-  font-weight: 600; cursor: pointer; color: var(--putih); 
-  font-size: 16px; padding: 4px 0; list-style: none;
-  display: flex; align-items: center; gap: 8px;
-}
-summary::before { content: '▶️'; font-size: 14px; transition: transform 0.2s; }
-details[open] > summary::before { transform: rotate(90deg); }
-summary::-webkit-details-marker { display: none; }
-summary small { color: var(--abu); font-weight: normal; font-size: 12px; margin-left: 6px; }
-summary .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-left: 6px; }
-.badge-live { background: var(--hijau); color: white; animation: pulse 2s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-
-h3 { color: var(--emas); margin-bottom: 10px; font-weight: 500; font-size: 16px; }
-.sub { font-size: 13px; color: var(--abu); margin-bottom: 12px; }
-
-.progress-wrap { background: var(--hitam); border: 1px solid var(--batas); border-radius: 8px; height: 22px; overflow: hidden; margin: 10px 0; position: relative; }
-.progress-bar { background: var(--emas); height: 100%; width: 0%; transition: width 0.4s ease; }
-.progress-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--putih); }
-
-/* STATUS INDICATOR */
-.status-indicator { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--hitam); border: 1px solid var(--batas); border-radius: 10px; margin-bottom: 16px; }
-.status-dot { width: 12px; height: 12px; border-radius: 50%; }
+.status-indicator { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--gelap); border: 1px solid var(--batas); border-radius: 12px; margin-bottom: 12px; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .status-dot.producing { background: var(--hijau); animation: pulse 1.5s infinite; }
 .status-dot.standby { background: var(--kuning); animation: pulse 2.5s infinite; }
 .status-dot.customer { background: var(--biru); animation: pulse 1s infinite; }
 .status-dot.idle { background: var(--abu); }
-.status-text { flex: 1; font-weight: 600; font-size: 14px; }
-.status-detail { font-size: 11px; color: var(--abu); margin-top: 2px; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.status-text { flex: 1; font-weight: 600; font-size: 13px; }
+.status-detail { font-size: 10px; color: var(--abu); }
+.status-target { text-align: right; }
+.status-target small { font-size: 9px; color: var(--abu); display: block; }
+.status-target b { font-weight: 700; color: var(--emas); font-size: 15px; }
 
-.asset-list { max-height: 320px; overflow-y: auto; }
-.asset-item { background: var(--hitam); border: 1px solid var(--batas); border-radius: 10px; padding: 12px; margin-bottom: 8px; }
-.asset-item-head { display: flex; justify-content: space-between; margin-bottom: 6px; }
-.asset-title { font-weight: 600; color: var(--putih); font-size: 14px; flex: 1; }
-.asset-meta { font-size: 11px; color: var(--abu); }
-.asset-meta span { margin-right: 10px; }
-.asset-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-.asset-actions button { padding: 6px 10px; font-size: 11px; margin: 0; }
-.asset-empty { text-align: center; color: var(--abu); padding: 20px; font-size: 13px; }
+.tab-bar { display: flex; gap: 4px; overflow-x: auto; background: var(--hitam); padding: 5px; border-radius: 10px; margin-bottom: 12px; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { flex: 1; min-width: 55px; padding: 8px 4px; border-radius: 8px; background: transparent; border: 1px solid transparent; color: var(--abu); font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; margin: 0; transition: all 0.2s; outline: none; }
+.tab-btn.active { background: var(--emas); color: var(--hitam); }
+.tab-content { display: none; animation: fadeIn 0.3s; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.tab-title { font-size: 13px; color: var(--emas); font-weight: 600; margin-bottom: 2px; }
+.tab-sub { font-size: 11px; color: var(--abu); margin-bottom: 10px; }
 
-.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-.stat-box { background: var(--hitam); border: 1px solid var(--batas); border-radius: 10px; padding: 12px; text-align: center; }
-.stat-num { font-size: 20px; font-weight: 700; color: var(--emas); font-family: monospace; }
-.stat-label { font-size: 11px; color: var(--abu); margin-top: 4px; }
+.progress-wrap { background: var(--hitam); border: 1px solid var(--batas); border-radius: 8px; height: 20px; overflow: hidden; margin: 8px 0; position: relative; }
+.progress-bar { background: var(--emas); height: 100%; width: 0%; transition: width 0.4s ease; }
+.progress-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--putih); }
 
-#log { max-height: 280px; overflow-y: auto; background: var(--hitam); padding: 12px; border-radius: 10px; font: 12.5px/1.75 monospace; color: var(--abu); border: 1px solid var(--batas); }
-#log div { margin-bottom: 6px; border-left: 3px solid var(--batas); padding: 4px 8px; background: rgba(20,18,16,0.4); border-radius: 4px; }
-#log .ts { color: var(--abu); }
+.log-card { background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+.log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.log-title { color: var(--emas); font-weight: 600; font-size: 14px; }
+.log-filters { display: flex; gap: 4px; flex-wrap: wrap; }
+.filter-btn { padding: 4px 8px; border-radius: 10px; background: var(--hitam); border: 1px solid var(--batas); color: var(--abu); font-size: 10px; cursor: pointer; margin: 0; font-weight: 600; outline: none; }
+.filter-btn.active { background: var(--emas); color: var(--hitam); border-color: var(--emas); }
+#log { max-height: 320px; overflow-y: auto; background: var(--hitam); padding: 10px; border-radius: 10px; font: 12px/1.6 monospace; color: var(--abu); border: 1px solid var(--batas); }
+#log div { margin-bottom: 5px; border-left: 3px solid var(--batas); padding: 4px 8px; background: rgba(20,18,16,0.4); border-radius: 4px; }
+#log .ts { color: var(--abu); opacity: 0.7; }
 #log .della { color: var(--biru); font-weight: 600; }
 #log .sarah { color: var(--ungu); font-weight: 600; }
 #log .michelle { color: var(--hijau); font-weight: 600; }
@@ -104,168 +147,252 @@ h3 { color: var(--emas); margin-bottom: 10px; font-weight: 500; font-size: 16px;
 #log .money { color: var(--hijau); font-weight: 700; }
 #log .warn { color: var(--merah); }
 #log .info { color: var(--putih); }
+#log .system { color: var(--kuning); font-weight: 600; }
+#log .hidden { display: none; }
 
-/* CHAT */
-.chat-fab { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: var(--emas); color: var(--hitam); border: none; font-size: 28px; cursor: pointer; z-index: 998; box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
-.chat-fab.has-new::after { content: ''; position: absolute; top: 4px; right: 4px; width: 14px; height: 14px; background: var(--merah); border-radius: 50%; border: 2px solid var(--hitam); }
-.chat-panel { position: fixed; bottom: 90px; right: 20px; width: 360px; max-width: calc(100vw - 40px); height: 500px; max-height: calc(100vh - 120px); background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; z-index: 999; display: none; flex-direction: column; overflow: hidden; }
+.asset-list { max-height: 300px; overflow-y: auto; }
+.asset-item { background: var(--hitam); border: 1px solid var(--batas); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+.asset-title { font-weight: 600; color: var(--putih); font-size: 13px; margin-bottom: 3px; }
+.asset-meta { font-size: 10px; color: var(--abu); margin-bottom: 6px; }
+.asset-meta span { margin-right: 8px; }
+.asset-actions { display: flex; gap: 5px; flex-wrap: wrap; }
+.asset-actions button { padding: 5px 8px; font-size: 10px; margin: 0; }
+.asset-empty { text-align: center; color: var(--abu); padding: 20px; font-size: 12px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+.stat-box { background: var(--hitam); border: 1px solid var(--batas); border-radius: 10px; padding: 10px; text-align: center; }
+.stat-num { font-size: 16px; font-weight: 700; color: var(--emas); font-family: monospace; }
+.stat-label { font-size: 9px; color: var(--abu); margin-top: 3px; }
+
+/* === MODAL VIEWER === */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.modal-overlay.open { display: flex; }
+.modal-content { background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; width: 100%; max-width: 500px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; }
+.modal-header { padding: 12px 16px; border-bottom: 1px solid var(--batas); display: flex; justify-content: space-between; align-items: center; background: var(--hitam); }
+.modal-title { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--emas); font-size: 15px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 10px; }
+.modal-close { background: transparent; border: none; color: var(--abu); font-size: 18px; cursor: pointer; padding: 0; margin: 0; }
+.modal-body { padding: 16px; overflow-y: auto; flex: 1; font-size: 13px; line-height: 1.7; color: var(--putih); white-space: pre-wrap; word-wrap: break-word; }
+
+.chat-fab { position: fixed; bottom: 16px; right: 16px; width: 52px; height: 52px; border-radius: 50%; background: var(--emas); color: var(--hitam); border: none; font-size: 24px; cursor: pointer; z-index: 998; box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+.chat-panel { position: fixed; bottom: 78px; right: 16px; width: 340px; max-width: calc(100vw - 32px); height: 460px; max-height: calc(100vh - 100px); background: var(--gelap); border: 1px solid var(--batas); border-radius: 14px; z-index: 999; display: none; flex-direction: column; overflow: hidden; }
 .chat-panel.open { display: flex; }
-.chat-header { background: var(--hitam); padding: 12px 16px; border-bottom: 1px solid var(--batas); display: flex; align-items: center; gap: 10px; }
-.chat-header-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--emas); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.chat-header { background: var(--hitam); padding: 10px 12px; border-bottom: 1px solid var(--batas); display: flex; align-items: center; gap: 10px; }
+.chat-header-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--emas); display: flex; align-items: center; justify-content: center; font-size: 15px; }
 .chat-header-info { flex: 1; }
-.chat-header-name { font-weight: 600; font-size: 14px; }
-.chat-header-status { font-size: 11px; color: var(--hijau); }
-.chat-close { background: transparent; border: none; color: var(--abu); font-size: 20px; cursor: pointer; padding: 4px 8px; margin: 0; }
-.chat-characters { display: flex; gap: 6px; padding: 8px 12px; background: var(--hitam); border-bottom: 1px solid var(--batas); overflow-x: auto; }
-.char-btn { padding: 6px 12px; border-radius: 16px; background: var(--gelap); border: 1px solid var(--batas); color: var(--abu); font-size: 11px; cursor: pointer; white-space: nowrap; margin: 0; }
+.chat-header-name { font-weight: 600; font-size: 12px; }
+.chat-header-status { font-size: 9px; color: var(--hijau); }
+.chat-close { background: transparent; border: none; color: var(--abu); font-size: 16px; cursor: pointer; padding: 4px 6px; margin: 0; }
+.chat-characters { display: flex; gap: 5px; padding: 8px 10px; background: var(--hitam); border-bottom: 1px solid var(--batas); overflow-x: auto; }
+.char-btn { padding: 4px 8px; border-radius: 12px; background: var(--gelap); border: 1px solid var(--batas); color: var(--abu); font-size: 9px; cursor: pointer; white-space: nowrap; margin: 0; }
 .char-btn.active { background: var(--emas); color: var(--hitam); border-color: var(--emas); }
-.chat-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
-.chat-msg { max-width: 85%; padding: 10px 12px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+.chat-messages { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.chat-msg { max-width: 88%; padding: 8px 10px; border-radius: 12px; font-size: 12px; line-height: 1.5; }
 .chat-msg.user { align-self: flex-end; background: var(--emas); color: var(--hitam); border-bottom-right-radius: 4px; }
 .chat-msg.ai { align-self: flex-start; background: var(--hitam); border: 1px solid var(--batas); border-bottom-left-radius: 4px; }
-.chat-msg .sender { font-size: 10px; font-weight: 700; margin-bottom: 4px; opacity: 0.7; }
+.chat-msg .sender { font-size: 8px; font-weight: 700; margin-bottom: 2px; opacity: 0.8; }
 .chat-msg.typing { font-style: italic; color: var(--abu); }
-.chat-quick { padding: 8px 12px; border-top: 1px solid var(--batas); display: flex; gap: 6px; overflow-x: auto; }
-.quick-btn { padding: 6px 10px; border-radius: 14px; background: var(--hitam); border: 1px solid var(--batas); color: var(--abu); font-size: 11px; cursor: pointer; white-space: nowrap; margin: 0; }
-.chat-input-wrap { padding: 10px 12px; border-top: 1px solid var(--batas); display: flex; gap: 8px; }
-.chat-input-wrap input { margin: 0; flex: 1; }
-.chat-send { background: var(--emas); color: var(--hitam); border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; margin: 0; font-weight: 700; }
-
-@media (max-width: 480px) {
-  .chat-panel { right: 10px; left: 10px; width: auto; bottom: 80px; }
-  .chat-fab { right: 10px; bottom: 10px; }
-}
+.chat-quick { padding: 8px 10px; border-top: 1px solid var(--batas); display: flex; gap: 5px; overflow-x: auto; }
+.quick-btn { padding: 4px 8px; border-radius: 10px; background: var(--hitam); border: 1px solid var(--batas); color: var(--abu); font-size: 9px; cursor: pointer; white-space: nowrap; margin: 0; }
+.chat-input-wrap { padding: 8px 10px; border-top: 1px solid var(--batas); display: flex; gap: 6px; }
+.chat-input-wrap input { margin: 0; flex: 1; padding: 9px; }
+.chat-send { background: var(--emas); color: var(--hitam); border: none; padding: 0 12px; border-radius: 10px; cursor: pointer; margin: 0; font-weight: 700; }
 </style>
 </head>
 <body>
 
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1 class="login-title">Joy Produksi</h1>
+    <p class="login-tagline">"Kami ada karena kamu Ade"</p>
+    <div class="login-input-wrap" id="loginWrap">
+      <span class="login-pipe">|</span>
+      <input type="password" id="login-pass" autocomplete="off" inputmode="numeric" />
+    </div>
+    <button id="login-btn" class="login-btn">LOGIN</button>
+    <p id="login-error" class="login-error"></p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
 <header>
-  <h1>Mesin Produksi JOY</h1>
-  <p>Della • Sarah • Michelle • Dola • Qwen • DeepSeek</p>
-  <span class="version">v6.1 CLEAN UI</span>
+  <h1>Joy Produksi</h1>
+  <p class="tagline">kami ada karena kamu Ade</p>
+  <p class="owner-label">pemegang kendali utama</p>
+  <div class="owner-row">
+    <span id="ownerName" class="owner-name">ade kurnia sandy</span>
+    <span id="toggleOwner" class="tiny-dot on" title="Tampilkan/Sembunyikan Owner"></span>
+  </div>
+  <span class="version">v7.4 READER</span>
 </header>
 
-<!-- STATUS INDICATOR -->
 <div class="status-indicator">
   <div id="statusDot" class="status-dot idle"></div>
   <div style="flex:1">
-    <div id="statusText" class="status-text">🟡 Standby</div>
-    <div id="statusDetail" class="status-detail">Menunggu perintah dari Owner</div>
+    <div id="statusText" class="status-text">⚪ Idle</div>
+    <div id="statusDetail" class="status-detail">Menunggu perintah Owner</div>
   </div>
-  <div style="text-align:right">
-    <div style="font-size:11px;color:var(--abu)">Target Hari Ini</div>
-    <div id="targetDisplay" style="font-weight:700;color:var(--emas)">0 / 10</div>
+  <div class="status-target">
+    <small>Target Hari Ini</small>
+    <b id="targetDisplay">0 / 10</b>
   </div>
 </div>
 
-<!-- INFO CARD -->
 <div class="card">
-  <div class="kv"><span>💳 Rekening Resmi</span><span class="rek-num">1180013000012</span></div>
   <div class="kv">
-    <span>💰 Total Pendapatan</span>
-    <div class="rev-wrap">
-      <span id="totalPendapatan" class="rev-num">Rp 0</span>
-      <button id="toggleRev" class="eye-btn">👁</button>
+    <span class="kv-label">💳 Rekening</span>
+    <div class="kv-value">
+      <span id="rekDisplay" class="rek-num">1180013000012</span>
+      <span id="toggleRek" class="tiny-dot on"></span>
     </div>
   </div>
-  <div class="kv"><span>📦 Total Produk</span><span id="totalProduk">0</span></div>
-  <div class="kv"><span>🛒 Total Terjual</span><span id="totalTerjual" style="color:var(--hijau);font-weight:600">0</span></div>
+  <div class="kv">
+    <span class="kv-label">💰 Pendapatan</span>
+    <div class="kv-value">
+      <span id="totalPendapatan" class="rev-num">Rp 0</span>
+      <span id="toggleRev" class="tiny-dot on"></span>
+    </div>
+  </div>
+  <div class="kv">
+    <span class="kv-label">📦 Produk</span>
+    <span id="totalProduk">0</span>
+  </div>
+  <div class="kv">
+    <span class="kv-label">🛒 Terjual</span>
+    <span id="totalTerjual" style="color:var(--hijau);font-weight:600">0</span>
+  </div>
 </div>
 
-<!-- MODE 24/7 (COLLAPSIBLE) -->
-<details class="card" style="border-left: 3px solid var(--hijau);">
-  <summary>🔄 Mode 24/7 Cerdas <span class="badge badge-live">LIVE</span> <small>• produksi otomatis</small></summary>
-  <p class="sub" style="margin-top:12px">Produksi otomatis sampai target tercapai, lalu standby menunggu customer</p>
-  <div class="row">
-    <input id="dailyTarget" type="number" min="1" max="100" value="10" placeholder="Target Harian" style="flex:1" />
-    <select id="autoType" style="flex:1">
-      <option value="random">🎲 Produk Acak</option>
-      <option value="selected">📌 Sesuai Pilihan</option>
-    </select>
-  </div>
-  <div class="row">
-    <button id="start247" class="sukses">▶ Aktifkan Mode 24/7</button>
-    <button id="stop247" class="bahaya" disabled>⏸ Matikan</button>
-  </div>
-  <div class="progress-wrap">
-    <div id="progressBar" class="progress-bar"></div>
-    <div id="progressText" class="progress-text">0 / 10 produk hari ini</div>
-  </div>
-</details>
-
-<!-- PRODUKSI MANUAL (COLLAPSIBLE) -->
-<details class="card" style="border-left: 3px solid var(--emas);">
-  <summary>📦 Produksi Manual <small>• buat produk sesuai keinginan</small></summary>
-  <select id="ty" style="margin-top:12px"></select>
-  <input id="t" placeholder="Judul / Ide Produk Digital" />
-  <div class="row">
-    <select id="mk">
-      <option>Global</option><option>US & EU</option><option>US</option><option>EU</option><option>IDN (Indonesia)</option>
-    </select>
-    <input id="qty" type="number" min="1" max="8" value="1" style="width:90px" />
-  </div>
-  <button id="go" class="utama" style="width:calc(100% - 8px)">▶ Produksi Sekarang</button>
-</details>
-
-<!-- PESANAN CUSTOMER (COLLAPSIBLE) -->
-<details class="card" style="border-left: 3px solid var(--biru);">
-  <summary>🎯 Pesanan Customer <small>• Qwen langsung tangani</small></summary>
-  <textarea id="customRequest" placeholder="Tulis permintaan customer di sini..." style="margin-top:12px"></textarea>
-  <button id="makeCustomBtn" class="utama" style="margin-top:10px;width:calc(100% - 8px)">✨ Proses Pesanan</button>
-</details>
-
-<!-- SALES TRACKER (COLLAPSIBLE) -->
-<details class="card" style="border-left: 3px solid var(--cyan);">
-  <summary>💵 Sales Tracker <small>• catat penjualan nyata</small></summary>
-  <div class="row" style="margin-top:12px">
-    <input id="saleNama" type="text" placeholder="Nama Produk" style="flex:2" />
-    <input id="saleHarga" type="number" placeholder="Harga (Rp)" style="flex:1" />
-  </div>
-  <input id="saleBuyer" type="text" placeholder="Nama Pembeli (opsional)" />
-  <button id="addSaleBtn" class="sukses" style="width:calc(100% - 8px)">✅ Catat Penjualan</button>
-</details>
-
-<!-- ASSET PRODUK (COLLAPSIBLE) -->
-<details class="card" open>
-  <summary>📂 Asset Produk <small>• <span id="assetCount">0</span> produk siap dijual</small></summary>
-  <div class="row" style="margin-top:12px">
-    <button id="downloadAll" class="sekunder">📥 Download Semua</button>
-    <button id="deleteAll" class="bahaya">🗑️ Hapus Semua</button>
-  </div>
-  <div id="assetList" class="asset-list"></div>
-</details>
-
-<!-- ANALYTICS (COLLAPSIBLE) -->
-<details class="card">
-  <summary>📈 Analytics <small>• statistik bisnis</small></summary>
-  <div class="stats-grid">
-    <div class="stat-box"><div class="stat-num" id="statProduk">0</div><div class="stat-label">Produk</div></div>
-    <div class="stat-box"><div class="stat-num" id="statTerjual">0</div><div class="stat-label">Terjual</div></div>
-    <div class="stat-box"><div class="stat-num" id="statRataHarga">Rp 0</div><div class="stat-label">Rata-rata</div></div>
-    <div class="stat-box"><div class="stat-num" id="statTerlaris" style="font-size:13px">-</div><div class="stat-label">Terlaris</div></div>
-  </div>
-</details>
-
-<!-- BACKUP (COLLAPSIBLE) -->
-<details class="card">
-  <summary>💾 Backup <small>• export & import data</small></summary>
-  <div class="row" style="margin-top:12px">
-    <button id="ex1" class="utama">📥 Export</button>
-    <button id="im1" class="sekunder">📂 Import</button>
-  </div>
-  <input id="imf" type="file" accept=".json" style="display:none" />
-</details>
-
-<!-- LOG -->
 <div class="card">
-  <h3>📜 Log Aktivitas</h3>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('auto', this)">⚡ Auto</button>
+    <button class="tab-btn" onclick="switchTab('manual', this)">🛠️ Buat</button>
+    <button class="tab-btn" onclick="switchTab('custom', this)">🎯 Custom</button>
+    <button class="tab-btn" onclick="switchTab('sales', this)">💵 Jual</button>
+    <button class="tab-btn" onclick="switchTab('asset', this)">📂 Asset</button>
+    <button class="tab-btn" onclick="switchTab('stats', this)">📈 Stats</button>
+    <button class="tab-btn" onclick="switchTab('backup', this)">💾 Data</button>
+  </div>
+
+  <div id="tab-auto" class="tab-content active">
+    <div class="tab-title">🔄 Mode 24/7 Cerdas</div>
+    <div class="tab-sub">Produksi otomatis sampai target, lalu standby</div>
+    <div class="row">
+      <input id="dailyTarget" type="number" min="1" max="100" value="10" placeholder="Target" style="flex:1" />
+      <select id="autoType" style="flex:1">
+        <option value="random">🎲 Acak</option>
+        <option value="selected">📌 Pilihan</option>
+      </select>
+    </div>
+    <div class="row">
+      <button id="start247" class="sukses" style="flex:1">▶ Aktifkan</button>
+      <button id="stop247" class="bahaya" disabled style="flex:1">⏸ Stop</button>
+    </div>
+    <div class="progress-wrap">
+      <div id="progressBar" class="progress-bar"></div>
+      <div id="progressText" class="progress-text">0 / 10 produk hari ini</div>
+    </div>
+  </div>
+
+  <div id="tab-manual" class="tab-content">
+    <div class="tab-title">🛠️ Produksi Manual</div>
+    <div class="tab-sub">Buat produk sesuai keinginan</div>
+    <select id="ty"></select>
+    <input id="t" placeholder="Judul / Ide Produk Digital" />
+    <div class="row">
+      <select id="mk" style="flex:2">
+        <option>Global</option><option>US & EU</option><option>US</option><option>EU</option><option>IDN (Indonesia)</option>
+      </select>
+      <input id="qty" type="number" min="1" max="8" value="1" style="width:70px;flex:0" />
+    </div>
+    <button id="go" class="utama" style="width:100%">▶ Produksi Sekarang</button>
+  </div>
+
+  <div id="tab-custom" class="tab-content">
+    <div class="tab-title">🎯 Pesanan Customer</div>
+    <div class="tab-sub">Qwen langsung tangani</div>
+    <textarea id="customRequest" placeholder="Tulis permintaan customer..."></textarea>
+    <button id="makeCustomBtn" class="utama" style="width:100%">✨ Proses Pesanan</button>
+  </div>
+
+  <div id="tab-sales" class="tab-content">
+    <div class="tab-title">💵 Sales Tracker & Balance</div>
+    <div class="tab-sub">Catat penjualan & kelola pendapatan</div>
+    <input id="saleNama" type="text" placeholder="Nama Produk" />
+    <input id="saleHarga" type="number" placeholder="Harga (Rp)" />
+    <input id="saleBuyer" type="text" placeholder="Nama Pembeli (opsional)" />
+    <button id="addSaleBtn" class="sukses" style="width:100%">✅ Catat Penjualan</button>
+    <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--batas);">
+      <div class="tab-sub" style="margin-bottom:6px">Modul Balance: Reset angka pendapatan ke 0 (Data penjualan tetap tersimpan)</div>
+      <button id="resetRevenueBtn" class="bahaya" style="width:100%">🔄 Reset Pendapatan</button>
+    </div>
+  </div>
+
+  <div id="tab-asset" class="tab-content">
+    <div class="tab-title">📂 Asset Produk <small style="color:var(--abu);font-weight:normal;font-size:10px">• <span id="assetCount">0</span> siap jual</small></div>
+    <div class="tab-sub">Lihat, download, share link Mayar, atau hapus</div>
+    <div class="row">
+      <button id="downloadAll" class="sekunder" style="flex:1">📥 Download Semua</button>
+      <button id="deleteAll" class="bahaya" style="flex:1">🗑️ Hapus Semua</button>
+    </div>
+    <div id="assetList" class="asset-list"></div>
+  </div>
+
+  <div id="tab-stats" class="tab-content">
+    <div class="tab-title">📈 Analytics Bisnis</div>
+    <div class="tab-sub">Statistik performa JOY Corporation</div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num" id="statProduk">0</div><div class="stat-label">Produk Dibuat</div></div>
+      <div class="stat-box"><div class="stat-num" id="statTerjual">0</div><div class="stat-label">Unit Terjual</div></div>
+      <div class="stat-box"><div class="stat-num" id="statRataHarga">Rp 0</div><div class="stat-label">Rata-rata Harga</div></div>
+      <div class="stat-box"><div class="stat-num" id="statTerlaris" style="font-size:11px">-</div><div class="stat-label">Produk Terlaris</div></div>
+    </div>
+  </div>
+
+  <div id="tab-backup" class="tab-content">
+    <div class="tab-title">💾 Backup & Restore</div>
+    <div class="tab-sub">Auto-shadow backup tiap 1 jam</div>
+    <div class="row">
+      <button id="ex1" class="utama" style="flex:1">📥 Export JSON</button>
+      <button id="im1" class="sekunder" style="flex:1">📂 Import JSON</button>
+    </div>
+    <div class="row">
+      <button id="restoreShadow" class="sukses" style="flex:1">🔄 Pulihkan Shadow</button>
+      <button id="manualBackup" class="sekunder" style="flex:1">💾 Backup Manual</button>
+    </div>
+    <div style="font-size:10px;color:var(--abu);margin-top:8px;text-align:center">
+      Shadow terakhir: <span id="lastShadow">-</span>
+    </div>
+    <input id="imf" type="file" accept=".json" style="display:none" />
+  </div>
+</div>
+
+<div class="log-card">
+  <div class="log-header">
+    <div class="log-title">📜 Log Kerja Tim</div>
+    <div class="log-filters">
+      <button class="filter-btn active" data-filter="all">Semua</button>
+      <button class="filter-btn" data-filter="team">Tim</button>
+      <button class="filter-btn" data-filter="money">Uang</button>
+      <button class="filter-btn" data-filter="system">Sistem</button>
+      <button class="filter-btn" data-filter="warn">⚠️</button>
+    </div>
+  </div>
   <div id="log"></div>
 </div>
 
-<!-- CHAT FAB -->
-<button id="chatFab" class="chat-fab" title="Ngobrol dengan Tim JOY">💬</button>
+<!-- MODAL VIEWER -->
+<div id="viewModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span id="viewModalTitle" class="modal-title">Judul Produk</span>
+      <button class="modal-close" onclick="closeViewModal()">✕</button>
+    </div>
+    <div id="viewModalBody" class="modal-body"></div>
+  </div>
+</div>
 
-<!-- CHAT PANEL -->
+<button id="chatFab" class="chat-fab">💬</button>
 <div id="chatPanel" class="chat-panel">
   <div class="chat-header">
     <div class="chat-header-avatar" id="chatAvatar">🧠</div>
@@ -287,449 +414,548 @@ h3 { color: var(--emas); margin-bottom: 10px; font-weight: 500; font-size: 16px;
 <script>
 const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const formatRupiah = (num) => 'Rp ' + Number(num).toLocaleString('id-ID');
-const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const formatRupiah = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 const LS = {
-  get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
-  set: (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+  get: k => { try { return localStorage.getItem(k); } catch(e) { return null; } },
+  set: (k,v) => { try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
 };
 
-const K = 'joy_v61_products', QUEUE_KEY = 'joy_v61_queue', REV_KEY = 'joy_v61_revenue', SALES_KEY = 'joy_v61_sales', CHAT_KEY = 'joy_v61_chat';
-const REKENING = '1180013000012';
+const K='joy_v74_products', REV='joy_v74_revenue', SALES='joy_v74_sales', CHAT='joy_v74_chat', SHADOW='joy_v74_shadow', META='joy_v74_meta';
+const REKENING='1180013000012';
+const OWNER_NAME='ade kurnia sandy';
+const DEFAULT_PIN = '123456';
 
-let P = []; try { const r = LS.get(K); P = r ? JSON.parse(r) : []; } catch(e) { P = []; }
-let queue = []; try { const r = LS.get(QUEUE_KEY); queue = r ? JSON.parse(r) : []; } catch(e) { queue = []; }
-let sales = []; try { const r = LS.get(SALES_KEY); sales = r ? JSON.parse(r) : []; } catch(e) { sales = []; }
-let chatHistory = []; try { const r = LS.get(CHAT_KEY); chatHistory = r ? JSON.parse(r) : []; } catch(e) { chatHistory = []; }
+let P=[], sales=[], chatHistory=[], revenue=0;
+try { P = JSON.parse(LS.get(K)||'[]'); } catch(e){ P=[]; }
+try { sales = JSON.parse(LS.get(SALES)||'[]'); } catch(e){ sales=[]; }
+try { chatHistory = JSON.parse(LS.get(CHAT)||'[]'); } catch(e){ chatHistory=[]; }
+revenue = parseInt(LS.get(REV)||'0');
 
-let revenue = parseInt(LS.get(REV_KEY) || '0');
-let revVisible = true;
-let busy = false;
-let mode247Active = false;
-let mode247Timer = null;
-let dailyCount = 0;
-let dailyTarget = 10;
-let dailyDate = new Date().toDateString();
-let currentStatus = 'idle';
+let ownerVisible=true, rekVisible=true, revVisible=true, busy=false;
+let mode247Active=false, mode247Timer=null, dailyCount=0, dailyTarget=10;
+let dailyDate=new Date().toDateString(), currentStatus='idle';
 
 const TY = [
-  { n: '🎨 Template Canva Premium', hargaMin: 75000, hargaMax: 250000, p: (t,m) => `Buat paket template Canva premium "${t}" untuk pasar ${m}. 20-30 template siap edit, panduan warna & font, instruksi.` },
-  { n: '📅 Planner Digital', hargaMin: 50000, hargaMax: 180000, p: (t,m) => `Buat planner digital "${t}" untuk pasar ${m}. Cover, halaman bulguan/mingguan/harian, tracker, goal setting.` },
-  { n: '📸 Preset Lightroom', hargaMin: 100000, hargaMax: 300000, p: (t,m) => `Buat preset Lightroom "${t}" untuk pasar ${m}. 15-25 preset, panduan mobile & desktop, niche spesifik.` },
-  { n: '📚 E-book Panduan', hargaMin: 75000, hargaMax: 250000, p: (t,m) => `Buat e-book "${t}" untuk pasar ${m}. 8-10 bab, contoh praktis, worksheet.` },
-  { n: '📋 Notion Template', hargaMin: 100000, hargaMax: 350000, p: (t,m) => `Buat template Notion "${t}" untuk pasar ${m}. Dashboard, database, formula, instruksi.` },
-  { n: '📱 Content Kit', hargaMin: 150000, hargaMax: 400000, p: (t,m) => `Buat content kit "${t}" untuk pasar ${m}. 60 caption, 30 hook, hashtag, calendar 30 hari.` },
-  { n: '📊 Spreadsheet Tools', hargaMin: 150000, hargaMax: 500000, p: (t,m) => `Buat spreadsheet "${t}" untuk pasar ${m}. Dashboard, formula, grafik, form.` },
-  { n: '✉️ Email Sequence', hargaMin: 200000, hargaMax: 600000, p: (t,m) => `Buat email sequence "${t}" untuk pasar ${m}. 7-10 email, subject A/B, CTA.` },
-  { n: '🎓 Kursus Mini', hargaMin: 250000, hargaMax: 750000, p: (t,m) => `Buat mini course "${t}" untuk pasar ${m}. 5-7 modul, script, worksheet, quiz.` },
-  { n: '🤖 Prompt Pack', hargaMin: 50000, hargaMax: 200000, p: (t,m) => `Buat paket prompt AI "${t}" untuk pasar ${m}. 50-100 prompt, kategori, contoh.` },
-  { n: '🖼️ Aset Visual', hargaMin: 100000, hargaMax: 350000, p: (t,m) => `Buat aset desain "${t}" untuk pasar ${m}. Icon, ilustrasi, pattern, mockup.` },
-  { n: '🔌 Plugin', hargaMin: 300000, hargaMax: 1000000, p: (t,m) => `Buat plugin "${t}" untuk pasar ${m}. Kode lengkap, dokumentasi, lisensi.` },
-  { n: '💬 Bot WhatsApp', hargaMin: 500000, hargaMax: 1500000, p: (t,m) => `Buat bot WA "${t}" untuk pasar ${m}. Skrip lengkap, flow, command, database.` },
-  { n: '🛠️ Generator HTML', hargaMin: 200000, hargaMax: 750000, p: (t,m) => `Buat generator "${t}" untuk pasar ${m}. HTML/JS lengkap, UI modern.` },
-  { n: '⚡ Workflow Otomasi', hargaMin: 250000, hargaMax: 800000, p: (t,m) => `Buat workflow "${t}" untuk pasar ${m}. 5-10 template Zapier/Make/n8n.` },
-  { n: '🎁 Request Owner', hargaMin: 500000, hargaMax: 2000000, p: (t,m) => `[MODE OWNER] Produk premium: "${t}". Sangat detail, profesional, eksklusif, bonus maksimal.` }
+  {n:'🎨 Template Canva',hMin:75000,hMax:250000,p:(t,m)=>`Buat paket template Canva premium "${t}" untuk ${m}. 20-30 template siap edit, panduan warna & font.`},
+  {n:'📅 Planner Digital',hMin:50000,hMax:180000,p:(t,m)=>`Buat planner digital "${t}" untuk ${m}. Cover, halaman bulanan/mingguan/harian, tracker, goal setting.`},
+  {n:'📸 Preset Lightroom',hMin:100000,hMax:300000,p:(t,m)=>`Buat preset Lightroom "${t}" untuk ${m}. 15-25 preset, panduan mobile & desktop.`},
+  {n:'📚 E-book Panduan',hMin:75000,hMax:250000,p:(t,m)=>`Buat e-book "${t}" untuk ${m}. 8-10 bab, contoh praktis, worksheet.`},
+  {n:'📋 Notion Template',hMin:100000,hMax:350000,p:(t,m)=>`Buat template Notion "${t}" untuk ${m}. Dashboard, database, formula, instruksi.`},
+  {n:'📱 Content Kit',hMin:150000,hMax:400000,p:(t,m)=>`Buat content kit "${t}" untuk ${m}. 60 caption, 30 hook, hashtag, calendar 30 hari.`},
+  {n:'📊 Spreadsheet Tools',hMin:150000,hMax:500000,p:(t,m)=>`Buat spreadsheet "${t}" untuk ${m}. Dashboard, formula, grafik, form.`},
+  {n:'✉️ Email Sequence',hMin:200000,hMax:600000,p:(t,m)=>`Buat email sequence "${t}" untuk ${m}. 7-10 email, subject A/B, CTA.`},
+  {n:'🎓 Kursus Mini',hMin:250000,hMax:750000,p:(t,m)=>`Buat mini course "${t}" untuk ${m}. 5-7 modul, script, worksheet, quiz.`},
+  {n:'🤖 Prompt Pack',hMin:50000,hMax:200000,p:(t,m)=>`Buat paket prompt AI "${t}" untuk ${m}. 50-100 prompt, kategori, contoh.`},
+  {n:'🖼️ Aset Visual',hMin:100000,hMax:350000,p:(t,m)=>`Buat aset desain "${t}" untuk ${m}. Icon, ilustrasi, pattern, mockup.`},
+  {n:'🔌 Plugin',hMin:300000,hMax:1000000,p:(t,m)=>`Buat plugin "${t}" untuk ${m}. Kode lengkap, dokumentasi, lisensi.`},
+  {n:'💬 Bot WhatsApp',hMin:500000,hMax:1500000,p:(t,m)=>`Buat bot WA "${t}" untuk ${m}. Skrip lengkap, flow, command, database.`},
+  {n:'🛠️ Generator HTML',hMin:200000,hMax:750000,p:(t,m)=>`Buat generator "${t}" untuk ${m}. HTML/JS lengkap, UI modern.`},
+  {n:'⚡ Workflow Otomasi',hMin:250000,hMax:800000,p:(t,m)=>`Buat workflow "${t}" untuk ${m}. 5-10 template Zapier/Make/n8n.`},
+  {n:'🎁 Request Owner',hMin:500000,hMax:2000000,p:(t,m)=>`[MODE OWNER] Produk premium: "${t}". Sangat detail, profesional, eksklusif.`}
 ];
 
 const CHARACTERS = {
-  qwen: { name: 'Qwen', emoji: '🧠', color: 'var(--emas)', role: 'Strategist & General Assistant', quick: ['💡 Ide produk baru', '📊 Analisa bisnis', '🎯 Tips penjualan', '🔍 Riset tren'] },
-  della: { name: 'Della', emoji: '🔍', color: 'var(--biru)', role: 'Market Researcher', quick: ['📈 Tren pasar', '🎯 Target audiens', '💰 Analisis kompetitor', '🌍 Pasar potensial'] },
-  sarah: { name: 'Sarah', emoji: '✍️', color: 'var(--ungu)', role: 'Content Creator', quick: ['📝 Tulis caption', '🎨 Ide konten', '✏️ Perbaiki copy', '📚 Struktur e-book'] },
-  michelle: { name: 'Michelle', emoji: '🛡️', color: 'var(--hijau)', role: 'Quality Checker', quick: ['✅ Cek produk', '🔍 Review kualitas', '📋 Saran perbaikan', '⭐ Skor produk'] },
-  dola: { name: 'Dola', emoji: '📢', color: 'var(--pink)', role: 'Marketing Specialist', quick: ['📣 Strategi promosi', '🎯 Target customer', '💬 Copy iklan', '📱 Ide konten IG'] },
-  deepseek: { name: 'DeepSeek', emoji: '💰', color: 'var(--cyan)', role: 'Pricing & Sales Analyst', quick: ['💰 Harga optimal', '📊 Analisa penjualan', '🎯 Closing strategy', '💎 Value proposition'] }
+  qwen:{name:'Qwen',emoji:'🧠',color:'var(--emas)',role:'Strategist',quick:['💡 Ide produk baru','📊 Analisa bisnis','🎯 Tips penjualan','🔍 Riset tren']},
+  della:{name:'Della',emoji:'🔍',color:'var(--biru)',role:'Market Researcher',quick:['📈 Tren pasar','🎯 Target audiens','💰 Analisis kompetitor','🌍 Pasar potensial']},
+  sarah:{name:'Sarah',emoji:'✍️',color:'var(--ungu)',role:'Content Creator',quick:['📝 Tulis caption','🎨 Ide konten','✏️ Perbaiki copy','📚 Struktur e-book']},
+  michelle:{name:'Michelle',emoji:'🛡️',color:'var(--hijau)',role:'Quality Checker',quick:['✅ Cek produk','🔍 Review kualitas','📋 Saran perbaikan','⭐ Skor produk']},
+  dola:{name:'Dola',emoji:'📢',color:'var(--pink)',role:'Marketing',quick:['📣 Strategi promosi','🎯 Target customer','💬 Copy iklan','📱 Ide konten IG']},
+  deepseek:{name:'DeepSeek',emoji:'💰',color:'var(--cyan)',role:'Pricing Analyst',quick:['💰 Harga optimal','📊 Analisa penjualan','🎯 Closing strategy','💎 Value proposition']}
 };
-let activeChar = 'qwen';
+let activeChar='qwen';
 
-function renderTY() { $('ty').innerHTML = TY.map((x,i) => `<option value="${i}">${x.n}</option>`).join(''); }
-function saveP() { LS.set(K, JSON.stringify(P)); $('totalProduk').textContent = P.length; $('assetCount').textContent = P.length; renderAssets(); updateStats(); }
-function saveSales() { LS.set(SALES_KEY, JSON.stringify(sales)); updateStats(); }
-function saveRev() { 
-  LS.set(REV_KEY, revenue.toString()); 
-  $('totalPendapatan').textContent = revVisible ? formatRupiah(revenue) : 'Rp ••••••••';
-  $('totalTerjual').textContent = sales.length;
-}
-function saveChat() { LS.set(CHAT_KEY, JSON.stringify(chatHistory.slice(-100))); }
-
-function updateStats() {
-  $('statProduk').textContent = P.length;
-  $('statTerjual').textContent = sales.length;
-  const rata = sales.length > 0 ? Math.round(sales.reduce((s,x) => s+x.harga, 0) / sales.length) : 0;
-  $('statRataHarga').textContent = formatRupiah(rata);
-  const count = {};
-  sales.forEach(s => { count[s.nama] = (count[s.nama] || 0) + 1; });
-  const top = Object.entries(count).sort((a,b) => b[1]-a[1])[0];
-  $('statTerlaris').textContent = top ? top[0].substring(0, 15) : '-';
+// === LOGIN LOGIC ===
+function checkLogin() {
+  const pass = $('login-pass').value;
+  if(pass === DEFAULT_PIN) {
+    $('login-screen').classList.add('hidden');
+    setTimeout(() => { $('login-screen').style.display = 'none'; }, 600);
+    $('login-pass').value = '';
+    $('login-error').textContent = '';
+  } else {
+    $('login-error').textContent = 'PIN salah, coba lagi.';
+    $('login-pass').value = '';
+    $('login-pass').focus();
+    $('loginWrap').classList.add('shake');
+    setTimeout(() => $('loginWrap').classList.remove('shake'), 400);
+  }
 }
 
-function updateProgress() {
-  const pct = dailyTarget > 0 ? (dailyCount / dailyTarget) * 100 : 0;
-  $('progressBar').style.width = Math.min(pct, 100) + '%';
-  $('progressText').textContent = dailyCount + ' / ' + dailyTarget + ' produk hari ini';
-  $('targetDisplay').textContent = dailyCount + ' / ' + dailyTarget;
+// === MODAL VIEWER LOGIC ===
+window.viewProduct = function(idx) {
+  const p = P[idx];
+  if (!p || !p.files[0]) return;
+  $('viewModalTitle').textContent = p.judul;
+  $('viewModalBody').textContent = p.files[0].isi;
+  $('viewModal').classList.add('open');
+};
+
+window.closeViewModal = function() {
+  $('viewModal').classList.remove('open');
+};
+
+// Close modal when clicking outside content
+$('viewModal').addEventListener('click', function(e) {
+  if (e.target === $('viewModal')) closeViewModal();
+});
+
+function renderTY(){ $('ty').innerHTML=TY.map((x,i)=>`<option value="${i}">${x.n}</option>`).join(''); }
+function saveP(){ LS.set(K,JSON.stringify(P)); $('totalProduk').textContent=P.length; $('assetCount').textContent=P.length; renderAssets(); updateStats(); }
+function saveSales(){ LS.set(SALES,JSON.stringify(sales)); updateStats(); }
+function saveChat(){ LS.set(CHAT,JSON.stringify(chatHistory.slice(-100))); }
+
+function updateVisibility() {
+  $('ownerName').textContent = ownerVisible ? OWNER_NAME : "••••••••••••••";
+  $('ownerName').className = ownerVisible ? 'owner-name' : 'owner-name hidden';
+  $('toggleOwner').className = ownerVisible ? 'tiny-dot on' : 'tiny-dot';
+
+  $('rekDisplay').textContent = rekVisible ? REKENING : "••••••••••••";
+  $('toggleRek').className = rekVisible ? 'tiny-dot on' : 'tiny-dot';
+
+  $('totalPendapatan').textContent = revVisible ? formatRupiah(revenue) : "Rp ••••••••";
+  $('toggleRev').className = revVisible ? 'tiny-dot on' : 'tiny-dot';
 }
 
-function setStatus(status, detail) {
-  currentStatus = status;
-  const dot = $('statusDot');
-  dot.className = 'status-dot ' + status;
-  const labels = {
-    producing: ['🟢 Producing', 'Sedang membuat produk digital...'],
-    standby: ['🟡 Standby', 'Menunggu permintaan customer...'],
-    customer: ['🔵 Handling Customer', 'Qwen sedang melayani customer...'],
-    idle: ['⚪ Idle', 'Menunggu perintah dari Owner']
+function saveRev(){ LS.set(REV,revenue.toString()); updateVisibility(); }
+
+function updateStats(){
+  $('statProduk').textContent=P.length;
+  $('statTerjual').textContent=sales.length;
+  const rata = sales.length>0 ? Math.round(sales.reduce((s,x)=>s+x.harga,0)/sales.length) : 0;
+  $('statRataHarga').textContent=formatRupiah(rata);
+  const count={}; sales.forEach(s=>{count[s.nama]=(count[s.nama]||0)+1;});
+  const top=Object.entries(count).sort((a,b)=>b[1]-a[1])[0];
+  $('statTerlaris').textContent=top?top[0].substring(0,15):'-';
+}
+
+function updateProgress(){
+  const pct=dailyTarget>0?(dailyCount/dailyTarget)*100:0;
+  $('progressBar').style.width=Math.min(pct,100)+'%';
+  $('progressText').textContent=dailyCount+' / '+dailyTarget+' produk hari ini';
+  $('targetDisplay').textContent=dailyCount+' / '+dailyTarget;
+}
+
+function setStatus(status,detail){
+  currentStatus=status;
+  $('statusDot').className='status-dot '+status;
+  const labels={
+    producing:['🟢 Producing','Sedang membuat produk...'],
+    standby:['🟡 Standby','Menunggu customer...'],
+    customer:['🔵 Handling Customer','Qwen melayani customer...'],
+    idle:['⚪ Idle','Menunggu perintah Owner']
   };
-  $('statusText').textContent = labels[status][0];
-  $('statusDetail').textContent = detail || labels[status][1];
+  $('statusText').textContent=labels[status][0];
+  $('statusDetail').textContent=detail||labels[status][1];
 }
 
-function log(m, type='info') {
-  const d = document.createElement('div');
-  const ts = new Date().toLocaleTimeString('id-ID', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  let content = m;
+function log(m,type='info'){
+  const d=document.createElement('div');
+  const ts=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  let content=m;
   [['<b>Della</b>','<span class="della">Della</span>'],['<b>Sarah</b>','<span class="sarah">Sarah</span>'],
    ['<b>Michelle</b>','<span class="michelle">Michelle</span>'],['<b>Dola</b>','<span class="dola">Dola</span>'],
    ['<b>Qwen</b>','<span class="qwen">Qwen</span>'],['<b>DeepSeek</b>','<span class="deepseek">DeepSeek</span>']]
-  .forEach(([s,r]) => content = content.replace(new RegExp(s,'g'), r));
-  let cls = type === 'money' || type === 'success' ? 'money' : type === 'warn' ? 'warn' : 'info';
-  d.innerHTML = `<span class="ts">[${ts}]</span> <span class="${cls}">${content}</span>`;
+  .forEach(([s,r])=>content=content.replace(new RegExp(s,'g'),r));
+  
+  let cls='info', cat='team';
+  if(type==='money'||type==='success'){ cls='money'; cat='money'; }
+  else if(type==='warn'){ cls='warn'; cat='warn'; }
+  else if(type==='system'){ cls='system'; cat='system'; }
+  else if(type==='info'){ cat='system'; }
+  
+  d.className='log-entry';
+  d.dataset.cat=cat;
+  d.innerHTML=`<span class="ts">[${ts}]</span> <span class="${cls}">${content}</span>`;
   $('log').prepend(d);
-  while($('log').children.length > 100) $('log').lastChild.remove();
+  while($('log').children.length>200) $('log').lastChild.remove();
+  applyFilter();
 }
 
-function setBusy(v) {
-  busy = v;
-  ['go','makeCustomBtn','ex1','im1','start247'].forEach(id => { if($(id)) $(id).disabled = v; });
+let currentFilter='all';
+function applyFilter(){
+  document.querySelectorAll('#log .log-entry').forEach(el=>{
+    if(currentFilter==='all') el.classList.remove('hidden');
+    else el.classList.toggle('hidden', el.dataset.cat!==currentFilter);
+  });
 }
 
-function renderAssets() {
-  const list = $('assetList');
-  if (P.length === 0) { list.innerHTML = '<div class="asset-empty">📭 Belum ada produk</div>'; return; }
-  list.innerHTML = P.map((p, idx) => {
-    const tipe = TY[p.ty]?.n || 'Custom';
-    const tanggal = new Date(p.created).toLocaleDateString('id-ID', {day:'2-digit', month:'short'});
-    return `
-      <div class="asset-item">
-        <div class="asset-item-head"><div class="asset-title">${escapeHtml(p.judul)}</div></div>
-        <div class="asset-meta">
-          <span>🏷️ ${tipe}</span><span>📅 ${tanggal}</span><span>💰 ${formatRupiah(p.harga || 0)}</span>
-        </div>
-        <div class="asset-actions">
-          <button class="sekunder" onclick="downloadAsset(${idx})">📥 Produk</button>
-          <button class="sekunder" onclick="downloadSalesCopy(${idx})">📝 Copy</button>
-          <button class="utama" onclick="showMayarLink(${idx})">💳 Mayar</button>
-          <button class="bahaya" onclick="deleteAsset(${idx})">🗑️</button>
-        </div>
-      </div>`;
+function setBusy(v){
+  busy=v;
+  ['go','makeCustomBtn','ex1','im1','start247','addSaleBtn','manualBackup','restoreShadow','resetRevenueBtn'].forEach(id=>{
+    if($(id)) $(id).disabled=v;
+  });
+}
+
+window.switchTab=function(name, btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelector(`.tab-btn[onclick*="${name}"]`).classList.add('active');
+  $('tab-'+name).classList.add('active');
+};
+
+function renderAssets(){
+  const list=$('assetList');
+  if(P.length===0){ list.innerHTML='<div class="asset-empty">📭 Belum ada produk. Mulai produksi di tab Manual atau Auto.</div>'; return; }
+  list.innerHTML=P.map((p,idx)=>{
+    const tipe=TY[p.ty]?.n||'Custom';
+    const tgl=new Date(p.created).toLocaleDateString('id-ID',{day:'2-digit',month:'short'});
+    return `<div class="asset-item">
+      <div class="asset-title">${escapeHtml(p.judul)}</div>
+      <div class="asset-meta"><span>🏷️ ${tipe}</span><span>📅 ${tgl}</span><span>💰 ${formatRupiah(p.harga||0)}</span></div>
+      <div class="asset-actions">
+        <button class="utama" onclick="viewProduct(${idx})">👁️ Lihat</button>
+        <button class="sekunder" onclick="downloadAsset(${idx})">📥 Unduh</button>
+        <button class="sekunder" onclick="showMayarLink(${idx})">💳 Mayar</button>
+        <button class="bahaya" onclick="deleteAsset(${idx})">🗑️</button>
+      </div>
+    </div>`;
   }).join('');
 }
 
-window.downloadAsset = function(idx) {
-  const p = P[idx]; if (!p) return;
-  const blob = new Blob([p.files[0].isi], {type: 'text/plain'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = p.files[0].nama; a.click();
+window.downloadAsset=function(idx){
+  const p=P[idx]; if(!p) return;
+  const blob=new Blob([p.files[0].isi],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=p.files[0].nama; a.click();
+  log(`📥 <b>Dola</b>: "${p.judul}" didownload`,'success');
 };
-window.downloadSalesCopy = function(idx) {
-  const p = P[idx]; if (!p || !p.salesCopy) return;
-  const blob = new Blob([p.salesCopy], {type: 'text/plain'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'copy_' + p.judul.replace(/[^a-z0-9]/gi,'_').substring(0,20) + '.txt'; a.click();
+window.showMayarLink=function(idx){
+  const p=P[idx]; if(!p) return;
+  const link=`https://mayar.id/payment-link?amount=${p.harga||0}&name=${encodeURIComponent(p.judul)}`;
+  if(navigator.clipboard){ navigator.clipboard.writeText(link); alert('✅ Link Mayar disalin!\n\n'+link); }
+  else alert('Link Mayar:\n\n'+link);
+  log(`💳 Link Mayar "${p.judul}" siap dibagikan`,'success');
 };
-window.showMayarLink = function(idx) {
-  const p = P[idx]; if (!p) return;
-  const link = `https://mayar.id/payment-link?amount=${p.harga||0}&name=${encodeURIComponent(p.judul)}`;
-  alert('Link Mayar:\n\n' + link + '\n\n(Salin & bagikan ke customer)');
-};
-window.deleteAsset = function(idx) {
-  const p = P[idx]; if (!p) return;
-  if (!confirm(`Hapus "${p.judul}"?`)) return;
-  P.splice(idx, 1); saveP();
+window.deleteAsset=function(idx){
+  const p=P[idx]; if(!p) return;
+  if(!confirm(`Hapus "${p.judul}"?`)) return;
+  P.splice(idx,1); saveP();
+  log(`🗑️ Asset "${p.judul}" dihapus`,'warn');
 };
 
-async function callAI(prompt, model='qwen') {
-  try {
-    const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt + '\n\n[Jawab singkat, padat, profesional.]') + '?model=' + model);
-    if (!res.ok) throw new Error();
-    return await res.text();
-  } catch (e) {
-    return '[AI tidak tersedia. Coba lagi nanti.]';
+async function callAI(prompt,model='qwen',retry=1){
+  for(let attempt=0; attempt<=retry; attempt++){
+    try{
+      const res=await fetch('https://text.pollinations.ai/'+encodeURIComponent(prompt+'\n\n[Jawab singkat, padat, profesional.]')+'?model='+model);
+      if(!res.ok) throw new Error();
+      return await res.text();
+    }catch(e){
+      if(attempt<retry){ log(`⚠️ AI gagal, retry ke-${attempt+1}...`,'warn'); await sleep(2000); }
+    }
   }
+  log('❌ AI tidak tersedia setelah retry','warn');
+  return '[AI tidak tersedia. Silakan coba lagi nanti.]';
 }
 
-async function risetHarga(judul, tipeIdx, pasar) {
-  const item = TY[tipeIdx];
-  log('💰 <b>DeepSeek</b>: Riset harga...', 'info');
+async function risetHarga(judul,tipeIdx,pasar){
+  const item=TY[tipeIdx];
+  log('💰 <b>DeepSeek</b>: Riset harga pasar...','info');
   await sleep(500);
-  const prompt = `Harga jual optimal untuk "${judul}" (${item.n}) di ${pasar}. Range: ${item.hargaMin}-${item.hargaMax} IDR. Jawab HANYA angka.`;
-  const hasil = await callAI(prompt, 'deepseek');
-  const angka = parseInt(hasil.replace(/[^0-9]/g, ''));
-  let harga = (angka && angka >= item.hargaMin && angka <= item.hargaMax) ? angka : Math.floor(Math.random() * (item.hargaMax - item.hargaMin) + item.hargaMin);
-  log(`💰 <b>DeepSeek</b>: Harga = <b>${formatRupiah(harga)}</b>`, 'money');
+  const prompt=`Harga jual optimal "${judul}" (${item.n}) di ${pasar}. Range ${item.hMin}-${item.hMax} IDR. Jawab HANYA angka.`;
+  const hasil=await callAI(prompt,'deepseek');
+  const angka=parseInt(hasil.replace(/[^0-9]/g,''));
+  let harga=(angka&&angka>=item.hMin&&angka<=item.hMax)?angka:Math.floor(Math.random()*(item.hMax-item.hMin)+item.hMin);
+  log(`💰 <b>DeepSeek</b>: Harga optimal = <b>${formatRupiah(harga)}</b>`,'money');
   return harga;
 }
 
-async function generateSalesCopy(judul, tipe, pasar, harga) {
-  log('📝 <b>DeepSeek</b>: Menyusun sales copy...', 'info');
-  const prompt = `Sales copy untuk "${judul}" (${tipe}) di ${pasar}, harga ${formatRupiah(harga)}. Format: JUDUL MENARIK, HOOK, 5 MANFAAT (bullet), DESKRIPSI pendek, 3 BONUS, CTA.`;
-  return await callAI(prompt, 'deepseek');
+async function generateSalesCopy(judul,tipe,pasar,harga){
+  log('📝 <b>DeepSeek</b>: Menyusun sales copy...','info');
+  const prompt=`Sales copy "${judul}" (${tipe}) di ${pasar}, harga ${formatRupiah(harga)}. Format: JUDUL MENARIK, HOOK, 5 MANFAAT bullet, DESKRIPSI pendek, 3 BONUS, CTA.`;
+  return await callAI(prompt,'deepseek');
 }
 
-async function prosesStep1(judul, pasar, tipeIdx) {
-  const item = TY[tipeIdx];
-  setStatus('producing', `Membuat: ${judul.substring(0, 30)}...`);
-  log('🛠️ Memulai <b>' + item.n + '</b>', 'info');
-  log('🔍 <b>Della</b>: Riset ' + pasar + '...', 'info');
+async function prosesStep1(judul,pasar,tipeIdx){
+  const item=TY[tipeIdx];
+  setStatus('producing',`Membuat: ${judul.substring(0,25)}...`);
+  log('🛠️ Memulai <b>'+item.n+'</b>','info');
+  log('🔍 <b>Della</b>: Riset '+pasar+'...','info');
   await sleep(600);
-  log('✍️ <b>Sarah</b>: Membuat produk...', 'info');
-  const hasil = await callAI(item.p(judul, pasar), 'qwen');
-  const skor = (Math.random() * (9.9 - 8.5) + 8.5).toFixed(1);
-  log('🛡️ <b>Michelle</b>: QC ✅ Skor: <b>' + skor + '/10</b>', 'success');
+  log('✍️ <b>Sarah</b>: Membuat produk...','info');
+  const hasil=await callAI(item.p(judul,pasar),'qwen');
+  const skor=(Math.random()*(9.9-8.5)+8.5).toFixed(1);
+  log('🛡️ <b>Michelle</b>: QC ✅ Skor: <b>'+skor+'/10</b>','success');
   await sleep(400);
-  const harga = await risetHarga(judul, tipeIdx, pasar);
-  const salesCopy = await generateSalesCopy(judul, item.n, pasar, harga);
-  P.push({ty: tipeIdx, judul, market: pasar, harga, files:[{nama: judul.replace(/[^a-z0-9]/gi,'_').substring(0,30) + '.md', isi: hasil}], salesCopy, created: Date.now()});
+  const harga=await risetHarga(judul,tipeIdx,pasar);
+  const salesCopy=await generateSalesCopy(judul,item.n,pasar,harga);
+  P.push({ty:tipeIdx,judul,market:pasar,harga,files:[{nama:judul.replace(/[^a-z0-9]/gi,'_').substring(0,30)+'.md',isi:hasil}],salesCopy,created:Date.now()});
   saveP();
-  log('📢 <b>DeepSeek</b> & <b>Dola</b>: Marketing siap', 'success');
-  log('✅ <b>Produk siap dijual!</b> ' + formatRupiah(harga), 'money');
+  log('📢 <b>Dola</b> & <b>DeepSeek</b>: Marketing siap','success');
+  log('✅ Produk siap dijual! '+formatRupiah(harga),'money');
 }
 
-async function prosesStep2(request) {
-  setStatus('customer', 'Menangani permintaan customer...');
-  log('🎯 <b>Qwen</b>: Menerima pesanan customer...', 'info');
-  log('🧠 <b>Qwen</b>: Menganalisis kebutuhan...', 'info');
+async function prosesStep2(request){
+  setStatus('customer','Menangani customer...');
+  log('🎯 <b>Qwen</b>: Menerima pesanan customer...','info');
   await sleep(700);
-  log('✍️ <b>Sarah</b>: Membuat produk custom...', 'info');
-  const hasil = await callAI(`Produk digital custom: "${request}". Profesional, siap serah terima.`, 'qwen');
-  log('🛡️ <b>Michelle</b>: QC ✅ Valid!', 'success');
+  log('✍️ <b>Sarah</b>: Membuat produk custom...','info');
+  const hasil=await callAI(`Produk digital custom: "${request}". Profesional, siap serah terima.`,'qwen');
+  log('🛡️ <b>Michelle</b>: QC ✅ Valid!','success');
   await sleep(400);
-  const harga = Math.floor(Math.random() * (500000 - 150000) + 150000);
-  const salesCopy = await generateSalesCopy(request.substring(0, 50), 'Custom', 'IDN (Indonesia)', harga);
-  P.push({ty: 99, judul: 'Custom: ' + request.substring(0, 30), market: 'Custom', harga, files:[{nama:'custom_' + Date.now() + '.md', isi: hasil}], salesCopy, created: Date.now()});
+  const harga=Math.floor(Math.random()*350000+150000);
+  const salesCopy=await generateSalesCopy(request.substring(0,50),'Custom','IDN (Indonesia)',harga);
+  P.push({ty:99,judul:'Custom: '+request.substring(0,30),market:'Custom',harga,files:[{nama:'custom_'+Date.now()+'.md',isi:hasil}],salesCopy,created:Date.now()});
   saveP();
-  log('💳 <b>Dola</b>: Invoice (Rek: ' + REKENING + ')', 'info');
-  log('💰 <b>Customer</b>: Bayar! +' + formatRupiah(harga), 'money');
-  revenue += harga;
-  sales.push({nama: request.substring(0, 30), harga, buyer: 'Customer', date: Date.now()});
+  log('💳 <b>Dola</b>: Invoice (Rek: '+REKENING+')','info');
+  log('💰 <b>Customer</b>: Bayar! +'+formatRupiah(harga),'money');
+  revenue+=harga; sales.push({nama:request.substring(0,30),harga,buyer:'Customer',date:Date.now()});
   saveRev(); saveSales();
 }
 
-function checkDailyReset() {
-  const today = new Date().toDateString();
-  if (dailyDate !== today) { dailyDate = today; dailyCount = 0; log('🌅 <b>Hari baru!</b> Target direset', 'info'); }
+function checkDailyReset(){
+  const today=new Date().toDateString();
+  if(dailyDate!==today){ dailyDate=today; dailyCount=0; log('🌅 <b>Hari baru!</b> Target direset','system'); }
 }
 
-async function mode247Tick() {
-  if (!mode247Active) return;
+async function mode247Tick(){
+  if(!mode247Active) return;
   checkDailyReset();
-  if (dailyCount >= dailyTarget) {
-    setStatus('standby', `Target ${dailyTarget} tercapai! Menunggu customer...`);
-    log(`🎯 <b>Target tercapai!</b> Standby menunggu customer.`, 'success');
+  if(dailyCount>=dailyTarget){
+    setStatus('standby',`Target ${dailyTarget} tercapai! Menunggu customer...`);
     return;
   }
-  if (busy) return;
+  if(busy) return;
   setBusy(true);
-  let judul, tipeIdx;
-  const autoType = $('autoType').value;
-  if (autoType === 'random') {
-    const ideAcak = ['Template Instagram Bisnis', 'E-book Produktivitas', 'Preset Lightroom Portrait', 'Notion Life Planner', 'Content Kit UMKM', 'Spreadsheet Keuangan', 'Prompt Pack ChatGPT', 'Template Canva Wedding', 'Email Sequence Launching', 'Mini Course Marketing', 'Bot WA CS', 'Aset Icon Bisnis'];
-    judul = ideAcak[Math.floor(Math.random() * ideAcak.length)] + ' #' + (dailyCount + 1);
-    tipeIdx = Math.floor(Math.random() * (TY.length - 1));
+  let judul,tipeIdx;
+  if($('autoType').value==='random'){
+    const ide=['Template Instagram Bisnis','E-book Produktivitas','Preset Lightroom Portrait','Notion Life Planner','Content Kit UMKM','Spreadsheet Keuangan','Prompt Pack ChatGPT','Template Canva Wedding','Email Sequence Launching','Mini Course Marketing','Bot WA CS','Aset Icon Bisnis'];
+    judul=ide[Math.floor(Math.random()*ide.length)]+' #'+(dailyCount+1);
+    tipeIdx=Math.floor(Math.random()*(TY.length-1));
   } else {
-    judul = $('t').value.trim() || 'Produk Stok #' + (dailyCount + 1);
-    tipeIdx = +$('ty').value;
+    judul=$('t').value.trim()||'Produk Stok #'+(dailyCount+1);
+    tipeIdx=+$('ty').value;
   }
-  const pasar = $('mk').value;
-  log(`🚀 <b>24/7:</b> Produksi ${dailyCount + 1}/${dailyTarget} - "${judul}"`, 'info');
-  await prosesStep1(judul, pasar, tipeIdx);
-  dailyCount++;
-  updateProgress();
-  setBusy(false);
-  if (dailyCount >= dailyTarget) {
-    setStatus('standby', `Target tercapai! Standby menunggu customer...`);
-    log(`🎉 <b>TARGET TERCAPAI!</b> Mesin standby.`, 'success');
+  log(`🚀 <b>24/7:</b> ${dailyCount+1}/${dailyTarget} - "${judul}"`,'system');
+  await prosesStep1(judul,$('mk').value,tipeIdx);
+  dailyCount++; updateProgress(); setBusy(false);
+  if(dailyCount>=dailyTarget){
+    setStatus('standby','Target tercapai! Standby...');
+    log(`🎉 <b>TARGET TERCAPAI!</b> Mesin standby menunggu customer.`,'success');
   } else {
-    setStatus('producing', `Lanjut produksi... (${dailyCount}/${dailyTarget})`);
+    setStatus('producing',`Lanjut... (${dailyCount}/${dailyTarget})`);
   }
 }
 
-function start247() {
-  if (mode247Active) return;
-  dailyTarget = parseInt($('dailyTarget').value) || 10;
+function start247(){
+  if(mode247Active) return;
+  dailyTarget=parseInt($('dailyTarget').value)||10;
   checkDailyReset();
-  mode247Active = true;
-  $('start247').disabled = true;
-  $('stop247').disabled = false;
-  setStatus('producing', `Mode 24/7 aktif! Target: ${dailyTarget}`);
-  log(`🔄 <b>Mode 24/7 AKTIF!</b> Target: ${dailyTarget}`, 'success');
+  mode247Active=true;
+  $('start247').disabled=true; $('stop247').disabled=false;
+  setStatus('producing',`Mode 24/7 aktif! Target: ${dailyTarget}`);
+  log(`🔄 <b>Mode 24/7 AKTIF!</b> Target: ${dailyTarget}`,'success');
   mode247Tick();
-  mode247Timer = setInterval(mode247Tick, 60000);
+  mode247Timer=setInterval(mode247Tick,60000);
 }
 
-function stop247() {
-  mode247Active = false;
+function stop247(){
+  mode247Active=false;
   clearInterval(mode247Timer);
-  $('start247').disabled = false;
-  $('stop247').disabled = true;
-  setStatus('idle', 'Mode 24/7 dimatikan');
-  log('⏸ <b>Mode 24/7 DIMATIKAN</b>', 'warn');
+  $('start247').disabled=false; $('stop247').disabled=true;
+  setStatus('idle','Mode 24/7 dimatikan');
+  log('⏸ <b>Mode 24/7 DIMATIKAN</b>','warn');
 }
 
-// CHAT
-function renderCharacters() {
-  $('charList').innerHTML = Object.entries(CHARACTERS).map(([key, c]) => 
-    `<button class="char-btn ${key === activeChar ? 'active' : ''}" onclick="switchChar('${key}')">${c.emoji} ${c.name}</button>`
+function doShadowBackup(){
+  try {
+    const data={products:P,revenue,sales,chat:chatHistory.slice(-50),time:Date.now()};
+    LS.set(SHADOW,JSON.stringify(data));
+    LS.set(META,JSON.stringify({lastShadow:Date.now()}));
+    const meta=JSON.parse(LS.get(META)||'{}');
+    $('lastShadow').textContent=new Date(meta.lastShadow||Date.now()).toLocaleTimeString('id-ID');
+  } catch(e){}
+}
+
+function restoreShadow(){
+  const raw=LS.get(SHADOW);
+  if(!raw) return log('❌ Tidak ada shadow backup tersedia','warn');
+  try {
+    const data=JSON.parse(raw);
+    if(!confirm(`Pulihkan data dari shadow backup (${new Date(data.time).toLocaleString('id-ID')})?\nData saat ini akan ditimpa.`)) return;
+    if(data.products){ P=data.products; saveP(); }
+    if(data.revenue!==undefined){ revenue=data.revenue; saveRev(); }
+    if(data.sales){ sales=data.sales; saveSales(); }
+    if(data.chat){ chatHistory=data.chat; saveChat(); renderChat(); }
+    log('✅ <b>Data dipulihkan dari shadow backup</b>','success');
+  } catch(e){ log('❌ Shadow backup rusak','warn'); }
+}
+
+function renderCharacters(){
+  $('charList').innerHTML=Object.entries(CHARACTERS).map(([key,c])=>
+    `<button class="char-btn ${key===activeChar?'active':''}" onclick="switchChar('${key}')">${c.emoji} ${c.name}</button>`
   ).join('');
 }
-function renderQuick() {
-  const char = CHARACTERS[activeChar];
-  $('quickList').innerHTML = char.quick.map(q => 
-    `<button class="quick-btn" onclick="sendQuick('${q.replace(/'/g, "\\'")}')">${q}</button>`
-  ).join('');
+function renderQuick(){
+  const c=CHARACTERS[activeChar];
+  $('quickList').innerHTML=c.quick.map(q=>`<button class="quick-btn" onclick="sendQuick('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('');
 }
-window.switchChar = function(key) {
-  activeChar = key;
-  const c = CHARACTERS[key];
-  $('chatAvatar').textContent = c.emoji;
-  $('chatAvatar').style.background = c.color;
-  $('chatName').textContent = c.name;
-  $('chatStatus').textContent = '● Online • ' + c.role;
-  renderCharacters();
-  renderQuick();
+window.switchChar=function(key){
+  activeChar=key;
+  const c=CHARACTERS[key];
+  $('chatAvatar').textContent=c.emoji; $('chatAvatar').style.background=c.color;
+  $('chatName').textContent=c.name; $('chatStatus').textContent='● Online • '+c.role;
+  renderCharacters(); renderQuick();
 };
-function renderChat() {
-  const container = $('chatMessages');
-  if (chatHistory.length === 0) {
-    container.innerHTML = `<div class="chat-msg ai"><div class="sender" style="color:var(--emas)">🧠 Qwen</div>Halo Mas Ade! 👋 Saya Qwen, strategist JOY Corporation. Saya dan tim siap membantu 24/7.<br><br>💡 Coba klik pertanyaan cepat di bawah, atau ketik apa saja!</div>`;
+function renderChat(){
+  const container=$('chatMessages');
+  if(chatHistory.length===0){
+    container.innerHTML=`<div class="chat-msg ai"><div class="sender" style="color:var(--emas)">🧠 Qwen</div>Halo Mas Ade! 👋 Saya Qwen, strategist JOY Corporation.<br><br>💡 Klik pertanyaan cepat di bawah atau ketik apa saja!</div>`;
     return;
   }
-  container.innerHTML = chatHistory.map(m => {
-    if (m.role === 'user') return `<div class="chat-msg user">${escapeHtml(m.text)}</div>`;
-    const c = CHARACTERS[m.char] || CHARACTERS.qwen;
-    return `<div class="chat-msg ai"><div class="sender" style="color:${c.color}">${c.emoji} ${c.name}</div>${m.text.replace(/\n/g, '<br>')}</div>`;
+  container.innerHTML=chatHistory.map(m=>{
+    if(m.role==='user') return `<div class="chat-msg user">${escapeHtml(m.text)}</div>`;
+    const c=CHARACTERS[m.char]||CHARACTERS.qwen;
+    return `<div class="chat-msg ai"><div class="sender" style="color:${c.color}">${c.emoji} ${c.name}</div>${m.text.replace(/\n/g,'<br>')}</div>`;
   }).join('');
-  container.scrollTop = container.scrollHeight;
+  container.scrollTop=container.scrollHeight;
 }
-window.toggleChat = function() {
-  $('chatPanel').classList.toggle('open');
-  $('chatFab').classList.remove('has-new');
-};
-window.sendQuick = function(text) { $('chatInput').value = text; sendChat(); };
-window.sendChat = async function() {
-  const text = $('chatInput').value.trim();
-  if (!text) return;
-  chatHistory.push({role: 'user', text, time: Date.now()});
-  $('chatInput').value = '';
-  renderChat();
-  saveChat();
-  const typing = document.createElement('div');
-  typing.className = 'chat-msg ai typing';
-  const c = CHARACTERS[activeChar];
-  typing.innerHTML = `<div class="sender" style="color:${c.color}">${c.emoji} ${c.name}</div>sedang mengetik...`;
-  $('chatMessages').appendChild(typing);
-  $('chatMessages').scrollTop = $('chatMessages').scrollHeight;
-  const context = `KONTEKS BISNIS JOY:\n- Produk: ${P.length}\n- Penjualan: ${sales.length}\n- Pendapatan: ${formatRupiah(revenue)}\n- Target: ${dailyCount}/${dailyTarget}\n- Status: ${currentStatus}\n- Rekening: ${REKENING}`;
-  const prompt = `${context}\n\nOwner bertanya ke ${c.name} (${c.role}): ${text}\n\nJawab singkat (maks 150 kata), praktis, actionable. Bahasa Indonesia.`;
-  const modelMap = { qwen: 'qwen', della: 'qwen', sarah: 'qwen', michelle: 'qwen', dola: 'qwen', deepseek: 'deepseek' };
-  const jawaban = await callAI(prompt, modelMap[activeChar] || 'qwen');
+window.toggleChat=function(){ $('chatPanel').classList.toggle('open'); };
+window.sendQuick=function(text){ $('chatInput').value=text; sendChat(); };
+window.sendChat=async function(){
+  const text=$('chatInput').value.trim(); if(!text) return;
+  chatHistory.push({role:'user',text,time:Date.now()});
+  $('chatInput').value=''; renderChat(); saveChat();
+  const typing=document.createElement('div'); typing.className='chat-msg ai typing';
+  const c=CHARACTERS[activeChar];
+  typing.innerHTML=`<div class="sender" style="color:${c.color}">${c.emoji} ${c.name}</div>sedang mengetik...`;
+  $('chatMessages').appendChild(typing); $('chatMessages').scrollTop=$('chatMessages').scrollHeight;
+  const context=`KONTEKS JOY:\n- Produk: ${P.length}\n- Penjualan: ${sales.length}\n- Pendapatan: ${formatRupiah(revenue)}\n- Target: ${dailyCount}/${dailyTarget}\n- Status: ${currentStatus}`;
+  const prompt=`${context}\n\nOwner bertanya ke ${c.name} (${c.role}): ${text}\n\nJawab singkat (maks 150 kata), praktis, actionable. Bahasa Indonesia.`;
+  const jawaban=await callAI(prompt,activeChar==='deepseek'?'deepseek':'qwen');
   typing.remove();
-  chatHistory.push({role: 'ai', char: activeChar, text: jawaban, time: Date.now()});
-  renderChat();
-  saveChat();
-  if (!$('chatPanel').classList.contains('open')) $('chatFab').classList.add('has-new');
+  chatHistory.push({role:'ai',char:activeChar,text:jawaban,time:Date.now()});
+  renderChat(); saveChat();
 };
 
 // INIT
-window.addEventListener('DOMContentLoaded', () => {
-  renderTY(); saveP(); saveRev(); saveSales(); updateProgress();
-  setStatus('idle', 'Siap menerima perintah');
+window.addEventListener('DOMContentLoaded',()=>{
+  $('login-pass').focus();
+  $('login-btn').onclick = checkLogin;
+  $('login-pass').addEventListener('keypress', e => { if(e.key === 'Enter') checkLogin(); });
+
+  renderTY(); saveP(); saveRev(); updateVisibility(); saveSales(); updateProgress();
+  setStatus('idle','Siap menerima perintah');
   renderCharacters(); renderQuick(); renderChat();
-  log('✅ <b>JOY v6.1 Clean UI siap!</b>', 'success');
-  log('💬 <i>Klik 💬 untuk ngobrol dengan tim</i>', 'info');
-  log('🔄 <i>Semua panel bisa di-collapse dengan ▶️</i>', 'info');
-
-  $('toggleRev').onclick = () => {
-    revVisible = !revVisible;
-    $('toggleRev').textContent = revVisible ? '👁' : '👁‍🗨';
-    saveRev();
-  };
-  $('start247').onclick = start247;
-  $('stop247').onclick = stop247;
-
-  $('go').onclick = async () => {
-    const judul = $('t').value.trim();
-    if (!judul) return log('❌ <span class="warn">Masukkan judul</span>', 'warn');
-    const qty = parseInt($('qty').value) || 1;
+  
+  const meta=JSON.parse(LS.get(META)||'{}');
+  $('lastShadow').textContent=meta.lastShadow?new Date(meta.lastShadow).toLocaleTimeString('id-ID'):'Belum ada';
+  
+  log('✅ <b>Joy Produksi v7.4 Reader siap!</b>','success');
+  log('🛡️ <b>Sistem Keamanan AKTIF:</b> Auto-shadow 1 jam, AI auto-retry, Konfirmasi hapus ganda.','system');
+  log('💬 Klik 💬 untuk ngobrol dengan tim','info');
+  
+  setInterval(doShadowBackup,3600000);
+  doShadowBackup();
+  
+  $('toggleOwner').onclick=()=>{ ownerVisible=!ownerVisible; updateVisibility(); };
+  $('toggleRek').onclick=()=>{ rekVisible=!rekVisible; updateVisibility(); };
+  $('toggleRev').onclick=()=>{ revVisible=!revVisible; updateVisibility(); };
+  
+  document.querySelectorAll('.filter-btn[data-filter]').forEach(btn=>{
+    btn.onclick=()=>{
+      document.querySelectorAll('.filter-btn[data-filter]').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter=btn.dataset.filter;
+      applyFilter();
+    };
+  });
+  
+  $('start247').onclick=start247;
+  $('stop247').onclick=stop247;
+  
+  $('go').onclick=async()=>{
+    const judul=$('t').value.trim();
+    if(!judul) return log('❌ Masukkan judul produk','warn');
+    const qty=parseInt($('qty').value)||1;
     setBusy(true);
-    for (let i = 0; i < qty; i++) await prosesStep1(judul, $('mk').value, +$('ty').value);
+    for(let i=0;i<qty;i++) await prosesStep1(judul,$('mk').value,+$('ty').value);
     setBusy(false);
-    setStatus(mode247Active ? 'producing' : 'idle');
+    setStatus(mode247Active?'producing':'idle');
   };
-
-  $('makeCustomBtn').onclick = async () => {
-    const req = $('customRequest').value.trim();
-    if (!req) return log('❌ <span class="warn">Tulis permintaan</span>', 'warn');
+  
+  $('makeCustomBtn').onclick=async()=>{
+    const req=$('customRequest').value.trim();
+    if(!req) return log('❌ Tulis permintaan customer','warn');
     setBusy(true);
     await prosesStep2(req);
     setBusy(false);
-    $('customRequest').value = '';
-    setStatus(mode247Active ? 'producing' : 'idle');
+    $('customRequest').value='';
+    setStatus(mode247Active?'producing':'idle');
   };
-
-  $('addSaleBtn').onclick = () => {
-    const nama = $('saleNama').value.trim();
-    const harga = parseInt($('saleHarga').value);
-    const buyer = $('saleBuyer').value.trim() || 'Customer';
-    if (!nama || !harga) return log('❌ <span class="warn">Isi nama & harga</span>', 'warn');
-    sales.push({nama, harga, buyer, date: Date.now()});
-    revenue += harga;
+  
+  $('addSaleBtn').onclick=()=>{
+    const nama=$('saleNama').value.trim();
+    const harga=parseInt($('saleHarga').value);
+    const buyer=$('saleBuyer').value.trim()||'Customer';
+    if(!nama||!harga) return log('❌ Isi nama & harga produk','warn');
+    sales.push({nama,harga,buyer,date:Date.now()});
+    revenue+=harga;
     saveSales(); saveRev();
-    $('saleNama').value = ''; $('saleHarga').value = ''; $('saleBuyer').value = '';
-    log(`💰 <b>Penjualan Dicatat!</b> ${nama} - ${formatRupiah(harga)}`, 'money');
+    $('saleNama').value=''; $('saleHarga').value=''; $('saleBuyer').value='';
+    log(`💰 <b>Penjualan Nyata!</b> ${nama} - ${formatRupiah(harga)} dari ${buyer}`,'money');
   };
 
-  $('downloadAll').onclick = () => {
-    if (P.length === 0) return;
-    let txt = '=== JOY ASSETS ===\n\n';
-    P.forEach((p,i) => { txt += `#${i+1}. ${p.judul}\n${p.files[0]?.isi}\n\n---\n\n`; });
-    const blob = new Blob([txt], {type:'text/plain'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = `joy_assets_${new Date().toISOString().slice(0,10)}.txt`; a.click();
+  $('resetRevenueBtn').onclick=()=>{
+    if(revenue===0) return log('ℹ️ Pendapatan sudah 0','system');
+    if(!confirm('⚠️ Reset total pendapatan menjadi Rp 0?\n(Catatan penjualan tetap tersimpan di history)')) return;
+    revenue=0;
+    saveRev();
+    log('🔄 <b>Pendapatan direset ke Rp 0</b>','system');
   };
-  $('deleteAll').onclick = () => {
-    if (P.length === 0) return;
-    if (!confirm(`Hapus SEMUA ${P.length} produk?`)) return;
-    P = []; saveP();
+  
+  $('downloadAll').onclick=()=>{
+    if(P.length===0) return log('❌ Tidak ada asset','warn');
+    let txt='=== JOY CORPORATION - ALL ASSETS ===\n\n';
+    P.forEach((p,i)=>{ txt+=`#${i+1}. ${p.judul}\nHarga: ${formatRupiah(p.harga||0)}\n${p.files[0]?.isi}\n\n---\n\n`; });
+    const blob=new Blob([txt],{type:'text/plain'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=`joy_assets_${new Date().toISOString().slice(0,10)}.txt`; a.click();
+    log('📥 Semua asset didownload','success');
   };
-  $('ex1').onclick = () => {
-    const blob = new Blob([JSON.stringify({products: P, revenue, sales, chat: chatHistory}, null, 2)], {type:'application/json'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = `joy_backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
+  
+  $('deleteAll').onclick=()=>{
+    if(P.length===0) return;
+    const input=prompt(`⚠️ HAPUS SEMUA ${P.length} PRODUK?\n\nKetik "HAPUS" untuk konfirmasi:`);
+    if(input!=='HAPUS') return log('❌ Penghapusan dibatalkan','warn');
+    P=[]; saveP();
+    log('🗑️ <b>SEMUA ASSET DIHAPUS</b>','warn');
   };
-  $('im1').onclick = () => $('imf').click();
-  $('imf').onchange = (e) => {
-    const file = e.target.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const d = JSON.parse(ev.target.result);
-        if (d.products) { P = d.products; saveP(); }
-        if (d.revenue) { revenue = d.revenue; saveRev(); }
-        if (d.sales) { sales = d.sales; saveSales(); }
-        if (d.chat) { chatHistory = d.chat; saveChat(); renderChat(); }
-        log('✅ <b>Data dipulihkan</b>', 'success');
-      } catch (err) { log('❌ <span class="warn">File tidak valid</span>', 'warn'); }
+  
+  $('ex1').onclick=()=>{
+    if(busy) return;
+    const blob=new Blob([JSON.stringify({products:P,revenue,sales,chat:chatHistory},null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=`joy_backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
+    log('💾 Backup JSON diunduh','success');
+  };
+  
+  $('im1').onclick=()=>$('imf').click();
+  $('imf').onchange=(e)=>{
+    const file=e.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=(ev)=>{
+      try{
+        const d=JSON.parse(ev.target.result);
+        if(d.products){P=d.products;saveP();}
+        if(d.revenue!==undefined){revenue=d.revenue;saveRev();}
+        if(d.sales){sales=d.sales;saveSales();}
+        if(d.chat){chatHistory=d.chat;saveChat();renderChat();}
+        log('✅ <b>Data dipulihkan dari backup</b>','success');
+      }catch(err){ log('❌ File tidak valid','warn'); }
     };
     reader.readAsText(file);
   };
-
-  $('chatFab').onclick = () => toggleChat();
-  $('chatInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendChat(); });
   
-  setInterval(() => {
-    if (mode247Active && !busy && dailyCount >= dailyTarget) setStatus('standby', 'Target tercapai. Standby...');
-  }, 5000);
+  $('manualBackup').onclick=()=>doShadowBackup();
+  $('restoreShadow').onclick=()=>restoreShadow();
+  
+  $('chatFab').onclick=()=>toggleChat();
+  $('chatInput').addEventListener('keypress',e=>{ if(e.key==='Enter') sendChat(); });
+  
+  setInterval(()=>{ if(mode247Active&&!busy&&dailyCount>=dailyTarget) setStatus('standby','Target tercapai. Standby...'); },15000);
 });
 </script>
 </body>
